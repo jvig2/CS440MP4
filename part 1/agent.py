@@ -48,4 +48,52 @@ class Agent:
 
         '''
 
+        adjoining_wall_x = 0
+        if state[0]==40:
+            adjoining_wall_x = 1
+        elif state[0]==480:
+            adjoining_wall_x = 2
+
+        adjoining_wall_y = 0
+        if state[1] == 40:
+            adjoining_wall_y = 1
+        elif state[1] == 480:
+            adjoining_wall_y = 2
+
+        food_dir_x = 0
+        if state[3]<state[0]:
+            food_dir_x = 1
+        elif state[3]>state[0]:
+            food_dir_x = 2
+
+        food_dir_y = 0
+        if state[4] < state[1]:
+            food_dir_y = 1
+        elif state[4] > state[1]:
+            food_dir_y = 2
+
+        adjoining_body_top = 0
+        for i in state[3]:
+            if state[1] - 40 == i[1]:
+                adjoining_body_top = 1
+
+        adjoining_body_bottom = 0
+        for i in state[3]:
+            if state[1] + 40 == i[1]:
+                adjoining_body_bottom = 1
+
+        adjoining_body_left = 0
+        for i in state[3]:
+            if state[0] - 40 == i[0]:
+                adjoining_body_left = 1
+
+        adjoining_body_right = 0
+        for i in state[3]:
+            if state[0] + 40 == i[0]:
+                adjoining_body_right = 1
+
+        s = (adjoining_wall_x, adjoining_wall_y, food_dir_x, food_dir_y, adjoining_body_top, adjoining_body_bottom,
+             adjoining_body_left, adjoining_body_right)
+
+
         return self.actions[0]
